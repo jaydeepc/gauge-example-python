@@ -26,6 +26,7 @@ Search and edit and existing product
 tags: admin, product, edit
 "Find and store productId for" and "Open product edit page for stored productId" uses the sceanrio datastore
 
+* Find and store productId for "The Way to Go"
 * Open product edit page for stored productId
 * Update product specifier to new value <table:resources/product_data.csv>
 * Check product specifier has new value <table:resources/product_data.csv>
