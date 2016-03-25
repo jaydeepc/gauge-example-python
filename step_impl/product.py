@@ -1,7 +1,10 @@
 from getgauge.python import step
 
 from step_impl.driver import DriverFactory
-from step_impl.pages.base_page import ProductListPage, CreateProductPage, ProductPage, EditProductPage
+from step_impl.pages.create_product_page import CreateProductPage
+from step_impl.pages.edit_product_page import EditProductPage
+from step_impl.pages.product_list_page import ProductListPage
+from step_impl.pages.product_page import ProductPage
 
 list_page = ProductListPage(DriverFactory.driver)
 create_page = CreateProductPage(DriverFactory.driver)
