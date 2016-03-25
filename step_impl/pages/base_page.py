@@ -13,6 +13,16 @@ class BasePage(object):
     def __init__(self, driver):
         self.driver = driver
 
+    def click(self, element):
+        self.driver.find_element(*element).click()
+
+    def set(self, element, value):
+        self.driver.find_element(*element).clear()
+        self.driver.find_element(*element).send_keys(value)
+
+    def get(self, element):
+        return self.driver.find_element(*element).text
+
 
 class CustomerPage(BasePage):
     url = '{}customers/'.format(BasePage.admin_url)
@@ -21,11 +31,11 @@ class CustomerPage(BasePage):
     result = (By.XPATH, '//table/tbody/tr[1]/td[3]')
 
     def search_user(self, username):
-        self.driver.find_element(*self.user_name).send_keys(username)
-        self.driver.find_element(*self.submit).click()
+        self.set(self.user_name, username)
+        self.click(self.submit)
 
     def verify_user_listed(self, username):
-        assert self.driver.find_element(*self.result).text == username
+        assert self.get(self.result) == username
 
     def visit(self):
         self.driver.get(self.url)
@@ -41,11 +51,11 @@ class SignUpPage(BasePage):
 
     def signup(self):
         user_name = 'user_{}'.format(time.mktime(datetime.datetime.now().timetuple()))
-        self.driver.find_element(*self.user_name).send_keys(user_name)
-        self.driver.find_element(*self.email).send_keys('{}@gmail.com'.format(user_name))
-        self.driver.find_element(*self.password).send_keys('password')
-        self.driver.find_element(*self.confirm_password).send_keys('password')
-        self.driver.find_element(*self.submit).click()
+        self.set(self.user_name, user_name)
+        self.set(self.email, '{}@gmail.com'.format(user_name))
+        self.set(self.password, 'password')
+        self.set(self.confirm_password, 'password')
+        self.click(self.submit)
         DataStoreFactory.scenario_data_store().put('current_user', user_name)
 
     def visit(self):
@@ -59,8 +69,8 @@ class ProductListPage(BasePage):
     first_product = (By.XPATH, '//table/tbody/tr[1]/td[1]/a')
 
     def search(self, name):
-        self.driver.find_element(*self.title).send_keys(name)
-        self.driver.find_element(*self.submit).click()
+        self.set(self.title, name)
+        self.click(self.submit)
 
     def open_first_product(self):
         self.driver.find_element(*self.first_product).click()
@@ -79,12 +89,12 @@ class CreateProductPage(BasePage):
     submit = (By.NAME, "commit")
 
     def create(self, title, desc, author, price):
-        self.driver.find_element(*self.title).send_keys(title)
-        self.driver.find_element(*self.description).send_keys(desc)
-        self.driver.find_element(*self.author).send_keys(author)
-        self.driver.find_element(*self.price).send_keys(price)
-        self.driver.find_element(*self.image).send_keys("not available")
-        self.driver.find_element(*self.submit).click()
+        self.set(self.title, title)
+        self.set(self.description, desc)
+        self.set(self.author, author)
+        self.set(self.price, price)
+        self.set(self.image, "not available")
+        self.click(self.submit)
 
     def visit(self):
         self.driver.get(self.url)
@@ -99,17 +109,17 @@ class ProductPage(BasePage):
     delete_product = (By.LINK_TEXT, 'Delete Product')
 
     def verify_author(self, name):
-        self.driver.find_element(*self.author) == name
+        assert self.get(self.author) == name
 
     def delete(self):
-        self.driver.find_element(*self.delete_product).click()
+        self.click(self.delete_product)
         self.driver.switch_to_alert().accept()
 
     def save_product_id(self):
         DataStoreFactory.scenario_data_store().put("product_id", self.driver.find_element(*self.id).text)
 
     def verify_attribute(self, specifier, value):
-        assert self.driver.find_element(*getattr(self, specifier)).text == value
+        assert self.get(getattr(self, specifier)) == value
 
 
 class EditProductPage(BasePage):
@@ -120,11 +130,10 @@ class EditProductPage(BasePage):
     update_button = (By.NAME, "commit")
 
     def set_attribute_value(self, specifier, value):
-        self.driver.find_element(*getattr(self, specifier)).clear()
-        self.driver.find_element(*getattr(self, specifier)).send_keys(value)
+        self.set(getattr(self, specifier), value)
 
     def save(self):
-        self.driver.find_element(*self.update_button).click()
+        self.click(self.update_button)
 
     def visit(self):
         self.driver.get(self.url.format(id=DataStoreFactory.scenario_data_store().get("product_id")))
