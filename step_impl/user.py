@@ -1,6 +1,6 @@
 from getgauge.python import step
 
-from step_impl.driver import DriverFactory
+from step_impl.driver.driver import DriverFactory
 from step_impl.pages.signup_page import SignUpPage
 
 page = SignUpPage(DriverFactory.driver)

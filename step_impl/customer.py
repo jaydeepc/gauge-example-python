@@ -1,6 +1,6 @@
 from getgauge.python import step, DataStoreFactory
 
-from step_impl.driver import DriverFactory
+from step_impl.driver.driver import DriverFactory
 from step_impl.pages.customer_page import CustomerPage
 
 page = CustomerPage(DriverFactory.driver)
