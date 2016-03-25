@@ -2,8 +2,8 @@ import os
 
 
 class BasePage(object):
-    url = os.getenv('APP_ENDPOINT')
-    admin_url = '{}admin/'.format(url)
+    URL = os.getenv('APP_ENDPOINT')
+    ADMIN_URL = '{}admin/'.format(URL)
 
     def __init__(self, driver):
         self.driver = driver

@@ -5,20 +5,20 @@ from step_impl.pages.base_page import BasePage
 
 
 class EditProductPageLocators:
-    update_button = (By.NAME, "commit")
-    author = (By.ID, 'product_author')
-    description = (By.ID, 'product_description')
-    title = (By.ID, 'product_title')
+    UPDATE_BUTTON = (By.NAME, 'commit')
+    AUTHOR = (By.ID, 'product_author')
+    DESCRIPTION = (By.ID, 'product_description')
+    TITLE = (By.ID, 'product_title')
 
 
 class EditProductPage(BasePage):
-    url = '{url}products/{{id}}/edit'.format(url=BasePage.admin_url)
+    URL = '{url}products/{{id}}/edit'.format(url=BasePage.ADMIN_URL)
 
     def set_attribute_value(self, specifier, value):
-        self.set(getattr(EditProductPageLocators, specifier), value)
+        self.set(getattr(EditProductPageLocators, specifier.upper()), value)
 
     def save(self):
-        self.click(EditProductPageLocators.update_button)
+        self.click(EditProductPageLocators.UPDATE_BUTTON)
 
     def visit(self):
-        self.driver.get(self.url.format(id=DataStoreFactory.scenario_data_store().get("product_id")))
+        self.driver.get(self.URL.format(id=DataStoreFactory.scenario_data_store().get('product_id')))

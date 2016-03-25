@@ -4,20 +4,20 @@ from step_impl.pages.base_page import BasePage
 
 
 class ProductListPageLocators:
-    first_product = (By.XPATH, '//table/tbody/tr[1]/td[1]/a')
-    submit = (By.NAME, "commit")
-    title = (By.ID, 'q_title')
+    FIRST_PRODUCT = (By.XPATH, '//table/tbody/tr[1]/td[1]/a')
+    SUBMIT = (By.NAME, 'commit')
+    TITLE = (By.ID, 'q_title')
 
 
 class ProductListPage(BasePage):
-    url = '{}products/'.format(BasePage.admin_url)
+    URL = '{}products/'.format(BasePage.ADMIN_URL)
 
     def search(self, name):
-        self.set(ProductListPageLocators.title, name)
-        self.click(ProductListPageLocators.submit)
+        self.set(ProductListPageLocators.TITLE, name)
+        self.click(ProductListPageLocators.SUBMIT)
 
     def open_first_product(self):
-        self.click(ProductListPageLocators.first_product)
+        self.click(ProductListPageLocators.FIRST_PRODUCT)
 
     def visit(self):
-        self.driver.get(self.url)
+        self.driver.get(self.URL)

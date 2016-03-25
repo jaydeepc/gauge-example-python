@@ -4,20 +4,20 @@ from step_impl.pages.base_page import BasePage
 
 
 class CustomerPageLocators:
-    result = (By.XPATH, '//table/tbody/tr[1]/td[3]')
-    submit = (By.NAME, 'commit')
-    user_name = (By.ID, 'q_username')
+    RESULT = (By.XPATH, '//table/tbody/tr[1]/td[3]')
+    SUBMIT = (By.NAME, 'commit')
+    USER_NAME = (By.ID, 'q_username')
 
 
 class CustomerPage(BasePage):
-    url = '{}customers/'.format(BasePage.admin_url)
+    URL = '{}customers/'.format(BasePage.ADMIN_URL)
 
     def search_user(self, username):
-        self.set(CustomerPageLocators.user_name, username)
-        self.click(CustomerPageLocators.submit)
+        self.set(CustomerPageLocators.USER_NAME, username)
+        self.click(CustomerPageLocators.SUBMIT)
 
     def verify_user_listed(self, username):
-        assert self.get(CustomerPageLocators.result) == username
+        assert self.get(CustomerPageLocators.RESULT) == username
 
     def visit(self):
-        self.driver.get(self.url)
+        self.driver.get(self.URL)

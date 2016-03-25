@@ -6,11 +6,11 @@ from step_impl.pages.signup_page import SignUpPage
 page = SignUpPage(DriverFactory.driver)
 
 
-@step("On signup page")
+@step('On signup page')
 def navigate_to_sign_up_page():
     page.visit()
 
 
-@step("Fill in and send registration form")
+@step('Fill in and send registration form')
 def fill_form():
     page.signup()
