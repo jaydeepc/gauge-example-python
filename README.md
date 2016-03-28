@@ -24,10 +24,13 @@ This project uses
       brew install gauge
       ```
   - [Download Installer](http://getgauge.io/download.html)
-- [Install Gauge-Python plugin](http://getgauge.io/documentation/user/current/plugins/installation.html) by running<br>
-  ```
+- [Install Gauge-Python plugin](https://github.com/kashishm/gauge-python/wiki/User-Documentation) by running<br>
+  
+  ````
   gauge --install python
-  ```
+  pip install getgauge
+  ````
+
 ## Setting up the System Under Test (SUT)
 
 * Download [activeadmin-demo.war](https://bintray.com/artifact/download/gauge/activeadmin-demo/activeadmin-demo.war)
