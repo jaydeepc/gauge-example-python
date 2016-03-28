@@ -25,10 +25,8 @@ This project uses
       ```
   - [Download Installer](http://getgauge.io/download.html)
 - [Install Gauge-Python plugin](https://github.com/kashishm/gauge-python/wiki/User-Documentation) by running<br>
-  
   ````
   gauge --install python
-  pip install getgauge
   ````
 
 ## Setting up the System Under Test (SUT)
