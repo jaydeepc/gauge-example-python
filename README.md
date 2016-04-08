@@ -1,4 +1,4 @@
-# Gauge example project, in Python
+# Gauge example project, in Python [![Build Status](https://snap-ci.com/kashishm/gauge-example-python/branch/master/build_image)](https://snap-ci.com/kashishm/gauge-example-python/branch/master)
 
 This project serves as an example for writing Automation using [Gauge](https://github.com/getgauge/gauge)
 
