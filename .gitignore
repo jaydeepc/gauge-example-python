@@ -61,3 +61,4 @@ target/
 gauge
 logs/
 reports/
+.gauge/
